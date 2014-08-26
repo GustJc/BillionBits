@@ -4,4 +4,19 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-BillionBits::Application.config.secret_token = '6ef2332e69eec2f13e92bdfbd30f0f704e89310917db28895c5897488896f7524d72dd07cc39bbc460396c537124e32d6d8ecd9a97e396685f65d5c9bfcaefd6'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+BillionBits::Application.config.secret_token = secure_token

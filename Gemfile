@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
+ruby '2.0.0'
 
 gem 'rails', '3.2.19'
 
@@ -21,6 +21,11 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+end
+
+
+group :development, :test do
+  gem 'rspec-rails', '2.13.1'
 end
 
 gem 'jquery-rails'
