@@ -1,0 +1,47 @@
+<header class="navbar-wrapper">
+  <div class="container">
+    <div class="navbar navbar-static-top navbar-inverse">
+      <div class="navbar-inner">
+          
+          <%= link_to root_path, class: "brand", id: "logo" do %>
+              <!-- <%= image_tag('home_icon.png') %> --> Billion Bits Games
+          <% end %>
+          <nav>
+            <ul class="nav pull-left divider-vertical">
+              <li <% if yield(:current) == t('pages.home') %>class="active"<% end %>>
+                <%= link_to t('pages.home'), home_path %></li>
+              <li <% if yield(:current) == t('pages.about') %>class="active"<% end %>>
+                <%= link_to t('pages.about'), about_path %></li>
+              <li <% if yield(:current) == t('pages.contact') %>class="active"<% end %>>
+                <%= link_to t('pages.contact'), contact_path %></li>
+            <!--
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </li>
+            -->
+            </ul>
+            <div class="btn-group pull-right">
+                <% if I18n.locale == :en %> 
+                  <%= link_to "English",  {locale: :en}, :class => "btn active" %>
+                <% else %>
+                  <%= link_to "English",  {locale: :en}, :class => "btn" %>
+                <% end %>
+
+                <% if I18n.locale == :pt %> 
+                  <%= link_to "Português",  {locale: ((I18n.locale == I18n.default_locale) ? nil : I18n.default_locale)}, :class => "btn active" %>
+                <% else %>
+                  <%= link_to "Português",  {locale: ((I18n.locale == I18n.default_locale) ? nil : I18n.default_locale)}, :class => "btn" %>
+                <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

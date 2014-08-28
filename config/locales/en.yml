@@ -3,3 +3,21 @@
 
 en:
   hello: "Hello world"
+
+  pages:
+    news: "News"
+    home: "Home"
+    index: "Index"
+    about: "About"
+    contact: "Contact"
+    games: "Games"
+    team: "Team"
+
+  home:
+    welcome: "Welcome to the Billion Bits"
+
+    sign_up: "Sign up now!"
+
+    welcome_text_html: >
+      This is the home page for the 
+      <a href='http://billionbits.herokuapp.com/'>

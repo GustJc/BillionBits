@@ -1,7 +1,20 @@
 BillionBits::Application.routes.draw do
-  get "static_pages/home"
-  get "static_pages/help"
-  get "static_pages/about"
+  
+  scope "(:locale)", locale: /pt|en/ do
+    root to: 'home_pages#home'
+
+    match 'index', to: "home_pages#home", :as => 'home_page'
+    match '', to: "home_pages#home"
+
+    # Home pages
+    match 'about', to: 'home_pages#about', via: 'get'
+    match 'contact', to: 'home_pages#contact', via: 'get'
+    match 'home', to: 'home_pages#home', via: 'get'
+
+  end
+
+
+  root to: 'home_pages#home'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
