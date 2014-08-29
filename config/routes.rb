@@ -1,5 +1,6 @@
 BillionBits::Application.routes.draw do
-  
+
+
   scope "(:locale)", locale: /pt|en/ do
     root to: 'home_pages#home'
 
@@ -10,6 +11,9 @@ BillionBits::Application.routes.draw do
     match 'about', to: 'home_pages#about', via: 'get'
     match 'contact', to: 'home_pages#contact', via: 'get'
     match 'home', to: 'home_pages#home', via: 'get'
+
+    # User and Accounts
+    match "users/new"
 
   end
 
