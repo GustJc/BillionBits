@@ -13,7 +13,8 @@ BillionBits::Application.routes.draw do
     match 'home', to: 'home_pages#home', via: 'get'
 
     # User and Accounts
-    match "users/new"
+    resources :users
+    match "/signup", to: 'users#new'
 
   end
 
