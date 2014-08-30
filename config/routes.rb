@@ -14,7 +14,7 @@ BillionBits::Application.routes.draw do
 
     # User and Accounts
     resources :users
-    match "/signup", to: 'users#new'
+    match "/signup", to: 'users#new', :as => 'register'
 
   end
 

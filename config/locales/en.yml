@@ -12,6 +12,7 @@ en:
     contact: "Contact"
     games: "Games"
     team: "Team"
+    register: "Register"
 
   home:
     welcome: "Welcome to the Billion Bits"
