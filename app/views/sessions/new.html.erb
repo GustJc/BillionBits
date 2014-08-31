@@ -1,19 +1,19 @@
-<% provide(:current, t('pages.signin')) %>
+<% provide(:current, t('pages.login')) %>
 <h1> Sign in </h1>
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(:session, url: sessions_path) do |f| %>
+    <%= form_tag sessions_path do %>
+      <%= label_tag :email %>
+      <%= text_field_tag :email %>
 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+      <%= submit_tag t('pages.login'), class: "btn btn-large btn-primary" %>
 
-      <%= f.submit t('pages.signin'), class: "btn btn-large btn-primary" %>
     <% end %>
-
+    
     <p>New User? <%= link_to "Sign up now!", register_path %></p>
   </div>
 </div>

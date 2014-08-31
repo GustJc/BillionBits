@@ -1,32 +1,43 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :name, :password, :password_confirmation
+  attr_accessor :password
+  attr_accessible :email, :password, :password_confirmation
 
-  before_save { email.downcase! }
-  before_create :create_remember_token
-
-  validates :name, presence: true, length: { maximum: 50 }
-  validates :password, length: { minimum: 6 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email, presence: true, 
-                    format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
+  validates :email, uniqueness: { case_sensitive: false },
+                    length: { within: 5..50 },
+                    format: { with: VALID_EMAIL_REGEX }
 
-  has_secure_password
+  validates :password, confirmation: true,
+                       length: { within: 4..50 },
+                       presence: true,
+                       if: :password_required?
 
-  validates_confirmation_of :password,
-                            if: lambda { |m| m.password.present? }
+  has_one :profile
 
-  def User.new_remember_token
-    SecureRandom.urlsafe_base64
-  end   
+  before_save :encrypt_new_password
 
-  def User.digest(token)
-    Digest::SHA1.hexdigest(token.to_s)
+  def self.authenticate(email, password)
+    user = find_by_email(email)
+    return user if user && user.authenticated?(password)
   end
 
-  private
+  def authenticated?(password)
+    self.hashed_password == encrypt(password)
+  end
 
-    def create_remember_token
-      self.remember_token = User.digest(User.new_remember_token)
-    end
+  protected
+
+  def encrypt_new_password
+    return if password.blank?
+    self.hashed_password = encrypt(password)
+  end
+
+  def password_required?
+    hashed_password.blank? || password.present?
+  end
+
+  def encrypt(string)
+    Digest::SHA1.hexdigest(string)
+  end
+
 end

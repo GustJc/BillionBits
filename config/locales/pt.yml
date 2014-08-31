@@ -14,7 +14,8 @@ pt:
     games: "Jogos"
     team: "Equipe"
     register: "Registrar"
-    signin: "Entrar"
+    login: "Entrar"
+    logout: "Sair"
 
 
   home:

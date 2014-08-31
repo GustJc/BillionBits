@@ -15,9 +15,11 @@
               <li <% if yield(:current) == t('pages.contact') %>class="active"<% end %>>
                 <%= link_to t('pages.contact'), contact_path %></li>
               
-              <% if signed_in? %>
-                <%= current_user.name %>
+              <% if logged_in? %>
+                <li class="active"> <%= link_to current_user.email, current_user %> </li>
               <% else %>
+                <li <% if yield(:current) == t('pages.login') %>class="active"<% end %>>
+                  <%= link_to t('pages.login'), login_path %></li>
                 <li <% if yield(:current) == t('pages.register') %>class="active"<% end %>>
                   <%= link_to t('pages.register'), register_path %></li>
               <% end %>

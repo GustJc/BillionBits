@@ -1,13 +1,17 @@
-<% provide(:current, @user.name) %>
+<% provide(:current, @user.email) %>
 
 <div class="row">
   <aside class="span4">
     <section>
       <h1>
         <%= gravatar_for @user %>
-        <%= @user.name %>
         <%= @user.email %>
       </h1>
     </section>
+  <% if logged_in? %>
+    <%= link_to t('pages.logout'), logout_path, class: "btn btn-medium btn-primary"  %>
+  <% end %>
+
   </aside>
+
 </div>

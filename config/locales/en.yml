@@ -13,7 +13,8 @@ en:
     games: "Games"
     team: "Team"
     register: "Register"
-    signin: "Sign in"
+    login: "Login"
+    logout: "Logout"
 
   home:
     welcome: "Welcome to the Billion Bits"

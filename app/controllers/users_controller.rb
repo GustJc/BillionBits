@@ -1,14 +1,5 @@
 class UsersController < ApplicationController
 
-  def show
-    begin
-      @user = User.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      flash[:error] = "Não foi possivel encontrar usuário"
-      redirect_to :action => 'new'
-    end
-  end
-
   def new
     @user = User.new
   end
@@ -19,7 +10,29 @@ class UsersController < ApplicationController
       flash[:success] = "Sua conta foi criada"
       redirect_to @user
     else
-      render 'new'
+      render :action => 'new'
+    end
+  end
+
+  def edit
+    @user = User.find(params[id])
+  end
+
+  def update
+    @user = User.find(params[id])
+    if @user.update_attributes(params[id])
+      redirect_to root_path, :notice => "Atributos atualizados"
+    else
+      render :action => 'edit'
+    end
+  end
+
+  def show
+    begin
+      @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:error] = "Não foi possivel encontrar usuário"
+      redirect_to :action => 'new'
     end
   end
 end
