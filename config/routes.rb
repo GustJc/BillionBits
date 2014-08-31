@@ -14,7 +14,10 @@ BillionBits::Application.routes.draw do
 
     # User and Accounts
     resources :users
+    resources :sessions
     match "/signup", to: 'users#new', :as => 'register'
+    match "/signin", to: 'sessions#new', via: 'get'
+    match "/signout", to: 'sessions#destroy', via: 'delete'
 
   end
 
