@@ -5,6 +5,14 @@
   <div class="span6 offset3">
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages' %>
+
+      <%= f.fields_for :profile do |ff| %>
+          <%= ff.label :name %>
+          <%= ff.text_field :name %>
+      <% end %>
+
+      <%= f.label :username %>
+      <%= f.text_field :username %>
       
       <%= f.label :email %>
       <%= f.text_field :email %>

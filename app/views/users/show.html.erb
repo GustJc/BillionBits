@@ -5,7 +5,9 @@
     <section>
       <h1>
         <%= gravatar_for @user %>
-        <%= @user.email %>
+        Nome: <%= @user.profile.name %>
+        Username: <%= @user.username %>
+        Mail: <%= @user.email %>
       </h1>
     </section>
   <% if logged_in? %>
@@ -15,3 +17,24 @@
   </aside>
 
 </div>
+
+<div class="border-row">
+    <div class="box-content down"></div>
+</div>
+
+<h1 class = "game-header"> Seus Jogos </h1>
+<% if @user.profile.games.empty? %>
+    <div class = "game-area">
+      <center>
+        <h2 class="game-title"> Sem jogos </h2>
+      </center>
+    </div> <!-- Game area -->
+<% end %>
+
+<% @user.profile.games.each do |game| %>
+  <div class = "game-area">
+    <h2 class="game-title"> <%= game.name %> </h2>
+    <p class="game-text"> <%= game.rate %> </p>
+  </div> <!-- Game area -->
+<% end %>
+

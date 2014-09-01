@@ -3,8 +3,6 @@ class SessionsController < ApplicationController
   end
 
   def create
-    puts "+"*80
-    puts params
     user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id

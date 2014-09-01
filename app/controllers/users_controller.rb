@@ -2,10 +2,13 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @user.build_profile
   end
 
   def create
     @user = User.new(params[:user])
+    @user.profile.update_attributes(params[:user][:profile])
+    # Autosave and rollback profile
     if @user.save
       flash[:success] = "Sua conta foi criada"
       redirect_to @user

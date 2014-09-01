@@ -1,3 +1,41 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.box-content {
+    display: inline-block;
+    width: 250px;
+}
+
+.border-row {
+    border-bottom: 1px solid #ccc;
+}
+
+.down {
+    border-down: 1px solid #ccc;
+}
+
+.game-header {
+  font-family: 'Museo Slab',Georgia,'Times New Roman',serif;
+  text-shadow: 0 1px 0 #aaa;
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.game-title {
+  font-family: 'Museo Slab',Georgia,'Times New Roman',serif;
+  text-shadow: 0 1px 0 #aaa;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+.game-area {
+  background-color: rgba(231, 230, 230, 0.4);
+  border: 1px solid #888;
+  border-radius:3px;
+  margin-top: 8px;
+}
+
+.game-text {
+  margin-left: 12px;
+}
