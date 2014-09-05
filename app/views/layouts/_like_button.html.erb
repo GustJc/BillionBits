@@ -1,7 +1,4 @@
-
-<% if not logged_in? %>
-
-<% elsif game.likes.include?(current_user.profile) %> 
+<% if game.likes.include?(current_user.profile) %>
   <%= link_to 'Remove bit', remove_bits_path(:id => game), method: 'post', remote: 'true',
                           id: "remove_bits_#{game.id}", class: "btn btn-small btn-danger" %>
 <% else %>

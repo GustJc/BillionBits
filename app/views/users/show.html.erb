@@ -44,8 +44,10 @@
     <p class="game-text"> <%= game.rate %> </p>
     <!-- tag e de empty, placeholder para pegar id -->
     <h4><%= t("Bits: ") %><e id= <%= "game_bits_#{game.id}" %>><%= game.likes.count %></e></h4>
-    <%= render 'layouts/like_button', :game => game %>
-    <%= link_to 'Edit', edit_game_path(game), class: "btn btn-small btn-primary" %>
+    <% if logged_in? %>
+      <%= render 'layouts/like_button', :game => game %>
+      <%= link_to 'Edit', edit_game_path(game), class: "btn btn-small btn-primary" %>
+    <% end %>
   </div> <!-- Game area -->
 <% end %>
 
