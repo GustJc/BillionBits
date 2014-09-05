@@ -18,12 +18,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[id])
+    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[id])
-    if @user.update_attributes(params[id])
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
       redirect_to root_path, :notice => "Atributos atualizados"
     else
       render :action => 'edit'

@@ -10,12 +10,19 @@
         Mail: <%= @user.email %>
       </h1>
     </section>
-  <% if logged_in? %>
-    <%= link_to t('pages.logout'), logout_path, class: "btn btn-medium btn-primary"  %>
-  <% end %>
 
   </aside>
 
+</div>
+
+<div class="row">
+  <div class="span4">
+  <% if logged_in? %>
+    <%= link_to t('pages.logout'), logout_path, class: "btn btn-medium btn-primary"  %>
+    <%= link_to t('pages.add games'), add_games_path, class: "btn btn-medium btn-primary"  %>
+    <%= link_to t('pages.edit profile'), edit_user_path(current_user), class: "btn btn-medium btn-primary"  %>
+  <% end %>
+  </div>
 </div>
 
 <div class="border-row">
@@ -35,6 +42,10 @@
   <div class = "game-area">
     <h2 class="game-title"> <%= game.name %> </h2>
     <p class="game-text"> <%= game.rate %> </p>
+    <!-- tag e de empty, placeholder para pegar id -->
+    <h4><%= t("Bits: ") %><e id= <%= "game_bits_#{game.id}" %>><%= game.likes.count %></e></h4>
+    <%= render 'layouts/like_button', :game => game %>
+    <%= link_to 'Edit', edit_game_path(game), class: "btn btn-small btn-primary" %>
   </div> <!-- Game area -->
 <% end %>
 

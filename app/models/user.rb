@@ -20,13 +20,21 @@ class User < ActiveRecord::Base
                        presence: true,
                        if: :password_required?
 
+  before_save {
+    email.downcase!
+  }
+
 
 
   before_save :encrypt_new_password
 
 
-  def self.authenticate(email, password)
-    user = find_by_email(email)
+  def self.authenticate(email_or_username, password)
+    user = find_by_email(email_or_username)
+    if not user
+      user = find_by_username(email_or_username)
+    end
+
     return user if user && user.authenticated?(password)
   end
 

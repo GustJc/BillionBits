@@ -1,0 +1,38 @@
+
+<% if not logged_in? %>
+
+<% elsif game.likes.include?(current_user.profile) %> 
+  <%= link_to 'Remove bit', remove_bits_path(:id => game), method: 'post', remote: 'true',
+                          id: "remove_bits_#{game.id}", class: "btn btn-small btn-danger" %>
+<% else %>
+  <%= link_to 'Add bit', add_bits_path(:id => game), method: 'post', remote: 'true',
+                          id: "add_bits_#{game.id}", class: "btn btn-small btn-success" %>
+<% end %>
+
+<% content_for :js do %>
+
+  add_game_<%= game.id %> = function(xhr, data){
+      var btn = $('#add_bits_<%= game.id %>')[0];
+      btn.href = '<%= remove_bits_path(:id => game) %>';
+      btn.innerHTML = 'Remove bit';
+      btn.id = btn.id.replace("add_bits_", "remove_bits_");
+      btn.className = btn.className.replace("success", "danger");
+      $('#game_bits_<%= game.id %>').text(data.responseText);
+      $('#remove_bits_<%= game.id %>').unbind('ajax:complete')
+      $('#remove_bits_<%= game.id %>').bind('ajax:complete',remove_game_<%= game.id %>);
+  }
+
+  remove_game_<%= game.id %> = function(xhr, data){
+      var btn = $('#remove_bits_<%= game.id %>')[0];
+      btn.href = '<%= add_bits_path(:id => game) %>';
+      btn.innerHTML = 'Add bit';
+      btn.id = btn.id.replace("remove_bits_", "add_bits_");
+      btn.className = btn.className.replace("danger", "success");
+      $('#game_bits_<%= game.id %>').text(data.responseText);
+      $('#add_bits_<%= game.id %>').unbind('ajax:complete')
+      $('#add_bits_<%= game.id %>').bind('ajax:complete', add_game_<%= game.id %>);
+  }
+  
+  $('#add_bits_<%= game.id %>').bind('ajax:complete', add_game_<%= game.id %>);
+  $('#remove_bits_<%= game.id %>').bind('ajax:complete',remove_game_<%= game.id %>);
+<% end %> 

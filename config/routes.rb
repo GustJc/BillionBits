@@ -19,6 +19,13 @@ BillionBits::Application.routes.draw do
     match "/login", to: 'sessions#new', via: 'get'
     match "/logout", to: 'sessions#destroy'
 
+    # Games
+    resources :games
+    match "/game/new", to: 'games#new', :as => 'add_games'
+    match "/game/add_bits", to: 'games#add_bits', :as => 'add_bits', via: 'post'
+    match "/game/remove_bits", to: 'games#remove_bits', :as => 'remove_bits', via: 'post'
+    #match "/game/edit/:id", to: 'games#show', :as => 'edit_games'
+
   end
 
 
